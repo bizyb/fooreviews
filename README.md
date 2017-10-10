@@ -1,12 +1,12 @@
 # Fooreviews
 
-Fooreviews distills customer reviews into topics using natural language processing and some bit of machine learning. Users can learn about the various features of a product by looking at the summary generated and the corresponding sentiment and topic distribution charts. In addition, Fooreviews plots the metadata on all the reviews for a given product to get time-dependent trends on customer behavior. 
+Reading product reviews on Amazon or Best Buy can be a time-consuming process. Fooreviews attempts to solve this problem by distilling customer reviews into topics. Users can learn about the various features of a product by looking at the summary generated and the corresponding sentiment and topic distribution charts. In addition, Fooreviews plots the metadata on all the reviews for a given product to get time-dependent trends on customer behavior. 
 
 
 
 ## Data and Source code
 
-The project is currently in a private repository. If you'd like to learn more about it, please feel free to contact me [here](https://fooreviews.com/contact-us)
+The project is currently in a private repository. If you'd like to learn more about it, please feel free to contact me [here](https://fooreviews.com/contact-us).
 
 
 
