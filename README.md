@@ -24,7 +24,7 @@ The project is currently in a private repository. If you'd like to learn more ab
 
 ## Authors
 
-* **Bizuwork Melesse* - [https://github.com/bizyb](https://github.com/bizyb)
+* *Bizuwork Melesse* - [https://github.com/bizyb](https://github.com/bizyb)
 
 ## Demo
 
