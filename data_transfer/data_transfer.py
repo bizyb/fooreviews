@@ -27,7 +27,7 @@ class DataTransfer(object):
 	between the analysis and staging servers.
 
 	NB: This module resides in its own repository. A copy is found on each of
-	the servers. Any commits made need to be pushed/pulled as appropriate.
+	the servers. Any commits made needs to be pushed/pulled as appropriate.
 
 	Some background:
         Webapp was our only django project for the last eight months or so. 
