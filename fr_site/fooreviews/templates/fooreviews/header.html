@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% if not staging_server %}
+    <!-- Global Site Tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-107716898-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-107716898-1');
+</script>
+{% endif%}
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> {% block meta-tags %} {% include "./includes/meta-tags.html" %} {% endblock %} {% block staticfiles %} {% include "./includes/staticfiles.html" %} {% endblock %} {% block vertical-nav-script %} {% include "./includes/vertical-nav-script.html" %}
+    {% endblock %} {% block search-bar-script %} {% include "./includes/search-bar-script.html" %} {% endblock %}
+</head>
+<body>
+    <div class="wrapper">
+        <div class='header'>
+        <nav class="navbar navbar-default navbar-fixed-top">
+            <header class="header clearfix">
+                    <div class="fr-brand">
+                        <a href="/">{% load static %}
+            <img src="{% static 'img/logo.png'%}"></a>
+                    </div>
+                    {% if not index_page %}
+                    <div class="fr-search-2">
+                        <a href="#search">
+                            <span class="ion-ios-search-strong" style="margin-left:-10px;"></span>
+                        </a>
+                    </div>
+                    <div id="search">
+                        <form action="\search" method="get" class="container" accept-charset="utf-8" style="padding-top:6px; padding-left:0px; padding-bottom:8px;">
+                            <input type="search" name="q" value="{{ query|default_if_none:" " }}" placeholder="Search for a Product" required/>
+                            <button type="button" class="close">×</button>
+                        </form>
+                    </div>
+                    {% endif %}
+            </header>
+          </nav>
+        </div>
+    <div class='page-content'>
+    {% block content %} {% endblock %}
+    </div>
+    <div class='footer'>
+      <div class="container">
+            <div class='footer-mobile'>
+            <div class='col-xs-12'>
+            <div class="footer-social">
+               <!-- <a href="//twitter.com/fooreviews"><span class="ion-social-twitter"></span></a> -->
+            <!-- <a href="//www.facebook.com/Fooreviews-1861014434227945/"><span class="ion-social-facebook"></span></a> -->
+              <!-- <a href="google.com"><span class="ion-social-googleplus"></span></a> -->
+            </div>
+        </div>
+            <div class='row'>
+            <div class='col-xs-12 col-sm-6 copyright-legal-container'>
+                <div class="footer-legal">
+                     <a href="/about">About</a>
+                    <a href="/terms">Terms</a>
+                    <a href="/privacy">Privacy</a>
+                    </div>
+                </div>
+                <div class='col-xs-12 col-sm-6 copyright-legal-container'>
+            <div class="footer-copyright">
+                    <span>© 2017</span> <a href="/">foo<strong>reviews</strong>.com</a>
+            </div>
+        </div>
+    </div>
+        </div>
+    <div class='footer-desktop'>
+            <div class='col-xs-4'>
+                <div class="footer-legal">
+                     <a href="/about">About</a>
+                    <a href="/terms">Terms</a>
+                    <a href="/privacy">Privacy</a>
+                    </div>
+                </div>
+
+                <div class='col-xs-4'>
+            <div class="footer-social">
+              <!-- <a href="//twitter.com/fooreviews"><span class="ion-social-twitter"></span></a> -->
+            <!-- <a href="//www.facebook.com/Fooreviews-1861014434227945/"><span class="ion-social-facebook"></span></a> -->
+              <!-- <a href="google.com"><span class="ion-social-googleplus"></span></a> -->
+            </div>
+        </div>
+                <div class='col-xs-4'>
+            <div class="footer-copyright">
+                    <span>© 2017</span> <a href="/">foo<strong>reviews</strong>.com</a>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+
+ </div>
+    </body>
+</html>

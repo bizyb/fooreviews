@@ -1,0 +1,283 @@
+{% extends "fooreviews/header.html" %}
+{% block content %}
+{% load fr_tags %}
+
+<div class="container">
+       <div class="breadcrumb-container">
+        <a href="/topics/">All Topics</a>
+        <span class="ion-chevron-right"></span>
+           {% for crumb_dict in breadcrumb %}
+           {% if not forloop.first %}
+           {% for crumb_name, crumb_link in crumb_dict.items %}
+           <span class="ion-chevron-right"></span>
+           <a href="/{{crumb_link}}">
+           {{crumb_name}}
+            </a>
+            {%endfor%}
+           {% else %}
+           {% for crumb_name, crumb_link in crumb_dict.items %}
+           <!-- <span class="ion-chevron-right"></span> -->
+            <a href="/{{crumb_link}}"> 
+           {{crumb_name}}
+            </a>
+            {%endfor%}
+               {% endif%}
+           {%endfor%}
+  </div>
+  <div class='container detail'> 
+      <div class="col-xs-12 col-sm-3 col-md-3 col-lg-3">
+      <ul class="nav nav-pills nav-stacked">
+
+        <div class='nav-pill-list-container li-top'>
+        <li>
+          <a data-no-turbolink="true" href="#overview">Overview</a
+>        </li>
+      </div>
+          {% for aspect_dict in aspect_anchor_tags %}
+         <div class='nav-pill-list-container topics'>
+          {% for aspect, anchor_tag in aspect_dict.items %}
+        <li>
+          <a href='#{{anchor_tag | safe}}'>{{aspect}}</a>
+        </li>
+        {% endfor %}
+      </div>
+
+
+      {% endfor %}
+
+       {% if data_page_enabled %}
+        <div class='nav-pill-list-container'>
+        <li>
+          <a data-no-turbolink="true" href="#metadata">Metadata</a>
+        </li>
+        </div>
+        {% endif %}
+      </ul>
+    </div>
+     <div class="col-xs-12 col-sm-9 col-md-9 col-lg-9" style="padding:0">
+         <div class="article-container-detail">
+             <div class="col-md-12" style="padding:0; margin-bottom: 10px;">
+              <div class='anchor-offset' id='overview'></div>
+             <div class="article-main">
+                 <div class="article-main-top">
+                     <div class="row author-pub">
+                      <div class='author-pub left'>
+                      <div class="social">
+                          {% block social %}
+                         {% include "./includes/social.html" %}
+                        {% endblock %}
+                     </div>
+                   </div>
+                   <div class='author-pub right'>
+                    <div class='row'>
+
+                         <div class="author  col-xs-12">
+                         <h6>
+                          {# insert link to twitter handle here #}
+                         <!-- <span class="ion-person"> -->
+                        <!-- </span> @fooreviews  -->
+                         </h6>
+                        </div>
+                         <div class="pub col-xs-12">
+                         <h6> <span class="ion-ios-calendar">
+                            </span>
+                            {{ article.date_created }}</h6>
+                             </div>
+                           </div>
+                     </div>
+                     </div>
+                 </div>
+                  <div class="article-content">
+                      <div class="row">
+                        <div class='article-main-title'>
+                          <h1> {{article.article_title}}
+                            </h1>
+                          <span>
+                            Model Number: {{article.product.model_num}}
+
+
+                          </span>
+                        </div>
+                      <div class="col-sm-6 article-main-img">
+                          <img src={{ article.get_image_url }}
+                           class="img-responsive" style='padding: 15px;'>
+                      <div class="sec-divider"></div>
+                       <div class='article-main-meta-aspects-adjusted-rating'>
+                          {{adjusted_star_rating | safe}}
+                          <span>{{reviews_analyzed}}<span>
+
+                      </div>
+                     <div class="features-discovered-count">
+                      <strong>{{aspects_discovered}}</strong> Features Discovered
+                    </div>
+                      
+                </div>
+                      <div class='col-centered'>
+                      <div class="col-sm-6 article-main-key-specs">
+                        <h2>Highlights</h2>
+                           <span>
+                            <ul>
+                            {% for spec in key_specs %}
+                            <li>{{spec}}</li>
+                            {% endfor %}
+                          </ul>
+                       </span>
+                       
+                       <div class='where-to-buy'>
+                        {% for merchant, url in where_to_buy.items%}
+                        <a href={{url | safe }}>
+                          <h4>Buy from {{merchant}}</h4>
+                        </a>
+                        {% endfor %}
+                        
+                    </div>
+                   </div>
+                   </div>
+                  
+</div>  
+                 <div class="article-content">
+                  </div>
+                 </div> 
+                 
+                 </div>
+          
+            </div>             
+         </div>
+         <div class="col-md-12" style="padding:0;">
+          <div class="article-container-detail">
+            <div class='anchor-offset' id='analysis'></div>
+             <div class="article-main">
+                  <div class="article-content">
+
+                    <div class='topic-distro-summ-plot'>
+                    <div id='{{chartID_TDA|safe}}' style='max-width:100%'>
+                        {# topic_distro_TDA plot goes here #}
+                 </div>
+               </div>
+               <br>
+               <br>
+                <div class="sec-divider"></div>
+                <br>
+               <br>
+                 <div class='meta-asr detail-page'>
+                <div id='{{chartID_ASR|safe}}' style='max-width:100%'>
+                        {# aspect_rating plot goes here #}
+                 </div>
+                  </div>
+                 <div class='caption-generic'>{{article.caption_ASR | safe }}
+                 </div>
+                 
+
+
+
+                 <div class='topical-summaries-container'>
+
+                  <div class='row'>
+                 {% for frsku, content_list in article.content.items %}
+                  {% for aspect_dict in content_list %}
+                  {% for aspect in aspect_dict %}
+                  <div class='topical-summary-inner-container'>
+                    {% get_dict_item aspect_dict key=aspect request="aspect_star_rating" as aspect_star_rating%}
+                    {% get_dict_item aspect_dict key=aspect request="aspect_rating" as aspect_rating %}
+                    {% get_dict_item aspect_dict key=aspect request="anchor_tag" as anchor_tag %}
+                    {% get_dict_item aspect_dict key=aspect request="color" as aspect_color %}
+                    {% get_dict_item aspect_dict key=aspect request="summary" as summary%}
+                    <div class='anchor-offset' id="{{anchor_tag|safe}}"></div>
+                  <div class='topical-summary'>
+                    
+                    <h2>{{aspect}} <span class='star-rating'>{{aspect_star_rating | safe}} <strong>{{aspect_rating}}</strong>/5</span></h2>
+                    <div class='row'>
+                    <div class='col-xs-12 pros-cons'>
+                      <!-- <h4 style="background-color:{#{aspect_color | safe}#}">
+                        Summary</h4> -->
+                      {{summary | safe}}
+                    </div>
+                  </div>
+
+                    
+
+                </div>
+
+                {% endfor %}
+                 {% if not forloop.last %}
+                <div class="sec-divider"></div>
+                {% endif%}
+                </div>
+                 {% endfor %}
+                 {% endfor %}
+                 </div>
+                 </div></div></div>
+         
+             {% if data_page_enabled %}
+             <div class="col-md-12" style="padding:0; margin-top:20px;">
+          <div class="article-container-detail">
+             <div class='anchor-offset' id='metadata'></div>
+             <div class="article-main">
+              <div class='article-content'>
+
+              <div class='metadata'>
+                <h3>Metadata</h3>
+                {# disable metadata all at once or selectively #}
+                <div class='analysis'>
+                  {{article.metadata_text | safe}}
+                  <a href='{{article.download_link}}'>See the metadata</a>
+                </div>
+                  </div>
+                </div>
+                 </div>
+               </div>
+
+               </div>
+               {% endif %}
+             </div>
+
+
+                {% if related_found %}
+                  <div class="col-md-12" style="padding:0; margin-top:20px;">
+          <div class="article-container-detail">
+             
+             <div class="article-main related" id='related-reviews'>
+                 <div class="article-review">
+                      <h2>Recent Reviews</h2>
+                 </div>
+                 <div class='article-obj-list-container more-like-this '>
+                  <div class='row'>
+                  
+              {% for article_obj in related_article_set %}
+              {% block article-list-obj %}
+              {% include "./includes/article_obj_list.html" %}
+              {% endblock %}
+              {% endfor %}
+     
+                 
+                 </div>
+                 </div>
+                 </div></div></div>
+                 {% endif %}
+
+              <div class="col-md-12" style="padding:0; margin-top:20px;">
+              <div class="article-container-detail">
+              <div class='anchor-offset' id='discussion'></div>
+              <div class="article-main" style='background: none;'>
+              <div class="article-content">
+              <!-- Comments -->
+              </div>
+              </div></div></div> 
+          <div class="col-md-12" style="padding:0; margin-top:20px;">
+          <div class="article-container-detail">
+          <div class="article-main" style='background: none;'>
+          <div class="article-content">
+          <a href='#'> 
+          <div class='go-to-top fr-btn-generic'>
+          <span>Go to Top</span>
+          </div>
+          </a> 
+          </div>
+          </div></div></div>               
+    </div>
+</div>
+</div>
+{% block topic_distro %}
+{% include "graphs/data.html" %}
+{% endblock %}
+{% endblock %}

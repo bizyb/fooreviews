@@ -1,0 +1,129 @@
+ {% if facets %}
+ <div class="filter-menu">
+        <div class ='filter-header'>
+            <div class='filter-header-left'>
+            <h5>Refine</h5>
+        </div>
+        <div class='filter-header-right'>
+            <span type=button id='closeMenu' class='close_menu'>
+            <span class='filter-btn-close'>Done</span>
+        </span>
+        </div>
+        </div>
+    <div class='facet-collapsible'>
+    <div class="row">
+    <div class="col-xs-12">
+<div class="panel panel-primary" id='sort-2'>
+     <div class="panel-heading">
+        <div class='panel-inactive'>
+        <a data-toggle="collapse" data-parent="#accordion" href="#sort">
+                <div class="panel-title">Sort By</div>
+         {% if sort_by_label %}
+          <div class='panel-status'>{{sort_by_label}} 
+            <span class="pull-right panel-collapse-clickable-sort-2" data-toggle="collapse" data-parent="#accordion" href="#sort">                
+                <i class="ion-chevron-down"></i>
+            </span></div>
+          {% else %}
+          <div class='panel-status'>
+            <span class="pull-right panel-collapse-clickable-sort-2" data-toggle="collapse" data-parent="#accordion" href="#sort">                
+                <i class="ion-chevron-down"></i>
+            </span></div>
+          {% endif %}
+              </a>
+           </div>
+       </div>
+    <div id="sort" class="panel-collapse panel-collapse collapse">
+         <div class="panel-body">
+          {% if sort_dict %}
+          {% for sort_obj in sort_dict %}
+          {% for k, v in sort_obj.items %}
+          
+            <div class='sort-type'>
+                {% if k == sort_by_label %}
+              <span class="ion-android-radio-button-on"></span>
+              {% else %}
+              <span class="ion-android-radio-button-off"></span>
+              {%endif%}
+            <a href="{{v}}">{{k}}</a></div>
+          {% endfor %}
+          {% endfor %}
+        {% endif %}
+        </div>
+    </div>
+    </div>
+    </div>
+    </div>
+    </div>
+ {% for facet_dict in facets %}
+{% for facet_name, facet in facet_dict.items%}
+{% for slug_dict in facet_slugs %}
+{% for slug_key, slug_value in slug_dict.items %}
+{% if slug_key == facet_name %}
+<div class='facet-collapsible'>
+    <div class="row">
+    <div class="col-xs-12">
+        <div class="panel panel-primary" id='{{slug_value}}-2'>
+      <div class="panel-heading">
+        <div class='panel-inactive'>
+            <a data-toggle="collapse" data-parent="#accordion" 
+            href="#{{slug_value}}">
+            <div class="panel-title" style='font-weight:700'>{{facet_name}}</div>
+         {% if sort_by_label %}
+          <div class='panel-status'>{#{sort_by_label}#}  <span class="pull-right panel-collapse-clickable-{{slug_value}}-2" data-toggle="collapse" data-parent="#accordion" 
+            href="#{{slug_value}}">               
+            <i class="ion-chevron-down"></i>
+            </span></div>
+          {% else %}
+          <div class='panel-status'>  <span class="pull-right panel-collapse-clickable-{{slug_value}}-2" data-toggle="collapse" data-parent="#accordion" 
+            href="#{{slug_value}}">               
+            <i class="ion-chevron-down"></i>
+            </span></div>
+          {% endif %}
+        </a>
+        </div>
+    </div>
+    <div id="{{slug_value}}" class="panel-collapse panel-collapse collapse in">
+         <div class="panel-body">
+                 {% for bucket_dict in facet %}
+                  {% block category-facet %}
+                  {% include "./filter_facet.html" %}
+                  {% endblock %}
+                {% endfor %}
+              </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+{% endif %}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+{% endfor %}
+ </div>
+
+
+
+<script>
+
+    $(".panel-collapse").on("hide.bs.collapse", function () {
+      // change the chevron direction accordingly
+        var $this = $(this);
+        var contentID = $(this).attr('id');
+        var newID = contentID + '-2';
+        var targetClass = ".panel-collapse-clickable-"+newID;
+        $(targetClass).find('i').removeClass('ion-chevron-up').addClass('ion-chevron-down'),
+         $(targetClass).parents('.panel').find('.panel-active').removeClass('panel-active').addClass('panel-inactive');
+    });
+    $(".panel-collapse").on("show.bs.collapse", function () {
+        var $this = $(this);
+        var contentID = $(this).attr('id');
+        var newID = contentID + '-2';
+        facetID = newID
+        var targetClass = ".panel-collapse-clickable-"+newID;
+        $(targetClass).find('i').removeClass('ion-chevron-down').addClass('ion-chevron-up'),
+        $('#'+contentID).parents('.panel').find('.panel-inactive').removeClass('panel-inactive').addClass('panel-active');
+            });
+
+ </script>
+{% endif %}

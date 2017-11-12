@@ -1,0 +1,17 @@
+{% for bucket_key, bucket_values in bucket_dict.items %}
+<div class='facet-bucket'>
+<a href="{{bucket_values.1}}">
+{% if bucket_key in filtered_tokens %}
+<span class="ion-android-checkbox"></span>
+{% else %}
+{% if facet_name != category %}
+<span class="ion-android-checkbox-outline-blank"></span>
+{% endif%}
+{%endif%}
+<span class='bucket-name'>{{bucket_key}}</span></a>
+</div>
+<div class='facet-bucket-count'>
+<a href="{{bucket_values.1}}">
+<span class='bucket-count'>{{bucket_values.0}}</span></a>
+</div>
+{% endfor %}

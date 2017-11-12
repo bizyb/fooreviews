@@ -1,0 +1,50 @@
+{% extends "fooreviews/header.html" %} {% block content %} {% load static %}
+
+<div class="container" style="padding-top:32px;">
+    <div class="fr-leaderboard">
+        <div class="lb-header">
+            <h1>
+                Summarization of Customer Reviews
+              </h1>
+
+        </div>
+        <h2>
+
+        </h2>
+          <div class="fr-search-container">
+            <div class="fr-search">
+            <div id="fr-search">
+                <form action="\search" method="get" accept-charset="utf-8">
+                    <input type="search" name="q" value="{{ query|default_if_none:"" }}" placeholder="Search for a Product" autofocus/>
+                    <div class='fr-search-index-button'>
+                    <button type="submit" class="ion-ios-search" aria-hidden="true"></button>
+                  </div>
+                     
+                </form>
+                </div>
+                </div>
+            </div>
+                  
+   
+        <div class='home-topics-container'>
+          <div class='row'>
+            {% for topic in topics %}
+           <div class='column '>
+            <div class='domain-container col-centered'>
+            <a href="topics/{{topic.1}}/">
+            <span class='home-topics'>
+              <h3>{{topic.0}}</h3>
+            <img src="{% static topic.2 %}">
+             </span>
+             <h5>
+              See All
+             </h5>
+           </a>
+           </div>
+           </div>
+           {% endfor%}
+</div>
+</div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+<script>
+{% block plot_tds %}
+{% include "graphs/plot.js" %}
+{% endblock %}
+var windowSize = $(window).width()
+var plottingData = {
+        'distro': [
+                    [{{ data_TDA|safe }}, '{{ chartID_TDA|safe }}', {{ title_TDA|safe }}],
+                ],
+        'donut': [],
+        'asr': [
+                    [{{ data_ASR|safe }}, '{{ chartID_ASR|safe }}', {{ title_ASR|safe }}]
+                ],
+        'tsr': [],
+
+}
+
+{% if metadata_page %}
+    // {#Remove TDS before pushing TDA (we do not want to show two pie charts fo he same data#}
+    // plottingData['distro'] = []
+    // plottingData['distro'].push([{{ data_TDA|safe }}, '{{ chartID_TDA|safe }}', {{ title_TDA|safe }}])
+    plottingData['donut'].push([{{ data_RDT|safe }}, '{{ chartID_RDT|safe }}', {{ title_RDT|safe }}])
+    plottingData['donut'].push([{{ data_CLF|safe }}, '{{ chartID_CLF|safe }}', {{ title_CLF|safe }}])
+    plottingData['tsr'].push([{{ data_TSR|safe }}, '{{ chartID_TSR|safe }}', {{ title_TSR|safe }}, {{ dates_TSR|safe }}])
+{% endif %}
+
+function plotData(){
+
+    for (var index in plottingData){
+        var innerLen = plottingData[index].length
+        for (j=0; j < innerLen; j+=1){
+            var dataSeries = plottingData[index][j][0]
+            var chartID = plottingData[index][j][1]
+            var title = plottingData[index][j][2]
+            if (index == 'distro'){
+                plotDistro(dataSeries, chartID, title)
+
+            }
+             if (index == 'donut'){
+                plotDonut(dataSeries, chartID, title)
+
+            }
+            else if (index == 'asr'){
+                plotASR(dataSeries, chartID, title)
+
+            }
+            else if (index == 'tsr'){
+                var dates = plottingData[index][j][3]
+                plotTSR(dataSeries, chartID, title, dates)
+
+            }
+
+        }    
+}
+}
+plotData()
+</script>

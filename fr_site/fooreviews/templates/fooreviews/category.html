@@ -1,0 +1,97 @@
+{% extends "fooreviews/header.html" %} 
+{% block content %}
+<!-- Breadcrumbs -->
+<div class="container category-crumb">
+  {% if breadcrumb_obj %}
+    <div class="breadcrumb-container">
+      <ol>
+    {% for crumb_dict, margin_offset in breadcrumb_obj %}
+    {% if not forloop.last %}
+    {% for crumb_name, crumb_url in crumb_dict.items%}
+    <li>
+      <a href="/{{crumb_url}}">{{crumb_name}}</a>
+      <span class="ion-chevron-right"></span>
+    </li>
+    {% endfor %}
+    {% else %}
+    {# disable the link on the last crumb and remove the chevron #}
+    {% for crumb_name, crumb_url in crumb_dict.items%}
+    <li>
+      {{crumb_name}}
+    </li>
+   
+  </ol>
+    </div>
+  
+  <div class='fr-category-title'>
+   <span>{{crumb_name}} </span>
+ </div>
+  {% endfor %}
+    {% endif%}
+    {% endfor %}
+    {% else%}
+    <div class="breadcrumb-container"></div>
+    {% endif %}
+</div>
+<!-- End Breadcrumbs -->
+
+<div class="container">
+    {% if paginated_list %}
+    {% if facets %}
+     <div class="facet-container col-xs-12 col-md-3">
+      <div class='fr-facet-heading-minor'>
+      <div class='mobile-filtering' type="button" id="toggleMenu">
+        <div class='row' style='margin: 0;'>
+        <div class='col-xs-12'>
+      <div class="toggle_menu">
+      <span class='ion-android-options'>  Filter</span>
+    </div>
+  </div>
+    <div class='col-xs-12'>
+    {% block facet-mobile-nav %}
+    {% include "./includes/facet_mobile_menu.html" %}
+    {% endblock %}
+  </div>
+</div>
+  </div>
+  </div>
+  </div>
+
+<div class="main-list-container col-xs-12 col-md-9">
+  <div class='article-obj-list-container'>
+  <div class='row'>
+          
+      {% for article_obj in paginated_list %}
+        
+          {% block article-list-obj %}
+        {% include "fooreviews/includes/article_obj_list.html" %}
+        {% endblock %}
+     
+        {% endfor %}
+
+  </div>
+  <div class="row" style="margin: 0 auto;">
+  <div class='pagination-nav'>
+  {% block pagination %}
+  {% include "./includes/pagination.html" %}
+  {% endblock %}
+  </div>
+  </div>
+{% endif %}
+</div>
+</div>
+
+{% else %}
+    <div class='fr-list-not-found'>
+   <h5>Sorry, this category currently doesn't have any articles.</h5>
+ </div>
+    
+  {% endif%}
+{% endblock %}
+
+
+
+
+
+
+

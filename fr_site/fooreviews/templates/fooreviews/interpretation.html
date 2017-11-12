@@ -1,0 +1,24 @@
+{% extends "fooreviews/header.html" %}
+{% block content %}
+
+<div class="container">
+<div class='container data-interpretation'>
+<div class="col-xs-12" style="padding:5px">
+       <h1 class='about-title'>{{title}}</h1>
+         <div class="article-container-detail-about">
+             <div class="article-main">
+                  <div class="article-about-content">
+                      {{ content.content | safe}}
+                 </div>
+                 </div>
+             </div>
+              
+                <div class='home-btn-container'>
+                <a href='/' class='fr-btn-generic'><span class='section-heading home'>
+                <span class='ion-ios-home'> Home</span></span></a>
+                </div>
+
+  </div>
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "fooreviews/header.html" %}
+{% block content %}
+{% load fr_tags %}
+
+<div class="container metadata">
+       <div class="breadcrumb-container">
+        
+  </div>
+  <div class='container detail'>
+     <div class="col-xs-12" style="padding:0">
+         <div class="article-container-detail">
+             <div class="col-md-12" style="padding:0; margin-bottom: 10px;">
+              <div class='anchor-offset' id='overview'></div>
+             <div class="article-main">
+                  <div class="article-content">
+                      <div class="row">
+                        <div class='article-main-title'>
+                          <h1> {{article.article_title}} </h1>
+                          <span>Model Number: {{article.product.model_num}}</span>
+                        </div>
+                </div>
+
+                  <br><br>
+                <div id='{{chartID_TDA|safe}}' style='max-width:100%'>
+                        {# topic_distro_TDA plot goes here #}
+                 </div>
+                 <br><br>
+                 <div class="sec-divider overview-middle"></div>
+                 <br><br>
+
+                  <div class='meta-asr data-page'>
+                   <div id='{{chartID_ASR|safe}}' style='max-width:90%'>
+                        {# aspect_rating plot goes here #}
+                 </div>
+                 </div>
+                  <br><br>
+                 <div class="sec-divider overview-middle"></div>
+                 <br><br>
+                 <div class='meta-tsr'>
+                     <div id='{{chartID_TSR|safe}}' style='max-width:90%'>
+                        {# time series plot goes here #}
+                 </div>
+                  </div>
+                   <br><br>
+                 <div class="sec-divider overview-middle"></div>
+                 <br><br>
+                   <div class='meta-donuts'>
+                    <div class='row'>
+                      <div class='meta-donuts-bottom left'>
+                         <div id='{{chartID_RDT|safe}}' style='max-width:100%'>
+                        {# rating distribution plot goes here #}
+                 </div>
+                 <br><br>
+                      </div>
+                      <div class='meta-donuts-bottom right'>
+                          <div id='{{chartID_CLF|safe}}' style='max-width:100%'>
+                        {# rating classification plot goes here #}
+                        </div>
+                    </div>
+                    </div>
+                  </div>
+</div>  
+       
+                 
+                 </div>
+          
+            </div>             
+         </div>
+</div>
+</div>
+{% block topic_distro %}
+{% include "graphs/data.html" %}
+{% endblock %}
+{% endblock %}

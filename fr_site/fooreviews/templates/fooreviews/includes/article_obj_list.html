@@ -1,0 +1,42 @@
+<div class='column'>
+  <div class='article-list-obj col-centered'>
+    <div class='list-header-row row'>
+    <a href="{{ article_obj.get_absolute_url }}">
+          <div class='ariticle-list-obj-title'>
+              <h3>
+                {{article_obj.article_title}}
+              </h3>
+          </div>
+          <div class='article-list-obj-thumbnail'>
+            <h6 >
+              {% if related_article_set %}
+              <img src={{ article_obj.get_image_url }}
+              {% else %}
+              <img src={{ article_obj.image }} 
+              {% endif %}
+
+              class="img-responsive-list">
+    
+            <div class='article-list-obj-thumbnail-product-model'>Model 
+                <strong>E35-789S453ss</strong>
+            </div>
+          </h6>
+        </div>
+    </a>
+  </div>
+  <div class='list-footer-row row'>
+      <div class='article-list-obj-footer'>
+        <h5>
+          <div class='article-list-obj-rating-stars'>
+          {{article_obj.adjusted_star_rating | safe}}
+          
+            <strong>{{article_obj.adjusted_rating}}</strong>
+            <span>/5</span>
+          </div>
+        </h5>
+      </div>
+    </div>
+    </div>
+  </div>
+
+

@@ -1,0 +1,51 @@
+{% extends "fooreviews/header.html" %} {% block content %}
+<div class="container">
+    <div class="page-content-title">
+        <div class="fr-search-header">
+        <h3 style="text-align:center;">
+            {% if not single_result %}
+            Found <span>{{ count }}</span> results for <span>"{{ q }}"</span>
+            {% else %}
+            Found <span>{{ count }}</span> result for <span>"{{ q }}"</span>
+            {% endif %}
+            </h3>
+            </div>
+    </div>
+    <!-- <div class="fr-list-container"> -->
+    <div class="col-xs-12">
+      <div class="article-obj-list-container" style="margin-top:20px;">
+          <div class="topics-container-list">
+    {% if paginated_list %} 
+    <div class='row' style='padding: 0px; margin: 0px;'>
+    {% for article_obj in paginated_list %}
+          {% block article-list-obj %}
+        {% include "fooreviews/includes/article_obj_list.html" %}
+        {% endblock %}
+         
+    {% endfor %}
+  </div>
+     <div class="col-md-12" style='float:none'>
+    <div class='pagination-nav'>
+    {% block pagination %}
+    {% include "fooreviews/includes/pagination.html" %}
+    {% endblock %}
+</div>
+</div>
+     </div>
+           </div> 
+    {% else %}
+     <div class="no-search-result"> 
+    <h3>Suggestions:</h3>
+         <ul>
+             <li>Check for spelling errors</li>
+             <li>Search for a more generic term</li> 
+         </ul>
+          <div class='home-btn-container search'>
+              <a href='/' class='fr-btn-generic home'><span class='section-heading home'>
+              <span class='ion-ios-home'><span style='padding-left: 5px;'>Home</span></span></span></a>
+              </div>
+         </div> 
+  {% endif %}
+</div>
+</div>
+{% endblock %}

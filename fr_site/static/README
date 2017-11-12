@@ -1,0 +1,2 @@
+We need this empty folder for some reason. Otherwise, Django throws IOError when
+trying to load the static folder(?) for the main site.

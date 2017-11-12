@@ -1,0 +1,16 @@
+*.log
+*/trash
+*.pyc
+*.orig
+/bin
+/include
+/media
+/share
+/lib
+*.json
+*.Python
+gunicorn_start.bash
+*.bash
+*robots.txt
+fr_site/settings.py
+fooreviews/urls.py

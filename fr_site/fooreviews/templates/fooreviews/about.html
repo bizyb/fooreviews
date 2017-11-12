@@ -1,0 +1,55 @@
+{% extends "fooreviews/header.html" %}
+{% block content %}
+
+<div class="container">
+<div class='container detail-about'>
+<div class="col-xs-12 col-md-3">
+    <ul class="nav nav-pills nav-stacked">
+            {% if template_type == 'about' %}
+            <div class='nav-pill-list-container active'>
+                {% else %}
+                <div class='nav-pill-list-container'>
+                    {% endif %}
+                    <li>
+                        <a data-no-turbolink="true" href="/about/">About</a>
+                    </li>
+                </div>
+         
+                {% if template_type == 'contact_us' %}
+                <div class='nav-pill-list-container li-bottom active'>
+                    {% else %}
+                    <div class='nav-pill-list-container li-bottom'>
+                        {% endif %}
+                        <li>
+                            <a data-no-turbolink="true" href="/contact-us/">Contact</a>
+                        </li>
+                    </div>
+    </ul>
+        
+    </div>
+<div class="col-xs-12 col-md-9" style="padding:5px">
+       <h1 class='about-title'>{{title}}</h1>
+       {% if template_type != 'contact_us' %}
+         <div class="article-container-detail-about">
+             <div class="article-main">
+                  <div class="article-about-content">
+                      {{ content.content | safe}}
+                 </div>
+                 </div>
+             </div>
+             {% else %}
+                  {% block contact_form %}
+                  {% include "./includes/contact.html" %}
+                  {% endblock %} 
+                {% endif%}
+            {% if template_type != 'contact_us' %}   
+                <div class='home-btn-container'>
+                <a href='/' class='fr-btn-generic'><span class='section-heading home'>
+                <span class='ion-ios-home'> Home</span></span></a>
+                </div>
+             {% endif%}
+
+  </div>
+</div>
+</div>
+{% endblock %}

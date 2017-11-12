@@ -37,10 +37,7 @@ class DataTransfer(object):
         server. However, we have no staging for fr_data. Fr_data's primary 
         task is to mine all review data and run the machine learning modules.
         Initially, our data transfer will be from webapp to fr_site and fr_data, 
-        the decoupled projects. Once we've transferred all the data to their
-        respective databases, we'll say goodbye to webapp (it won't go into 
-        production but we'll keep it for experimentation and writing tutorials
-        in the future). Thereafter, we'll transfer the local db entries from
+        the decoupled projects. Thereafter, we'll transfer the local db entries from
 		fr_site and fr_data to their cloud servers. In the futuer, data
 		transfers between thse two servers will be bi-direcitonal. (Although 
 		the service provider already has daily backups for our entire analysis 

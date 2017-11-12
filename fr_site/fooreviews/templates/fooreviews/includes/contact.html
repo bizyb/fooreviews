@@ -1,0 +1,24 @@
+<!-- <div class='container'> -->
+	<div class='fr-center-box-wrapper-contact'>	
+		<div class='fr-center-box contact'>
+			<div class='fr-form-header'>
+				<h5>Do you have any questions or concerns about Fooreviews? 
+					Please feel free to contact us here.</h5>
+			</div>
+			{% if not submitted %}
+			<form method='post' action=''>
+				{% csrf_token %}
+				{{ form.as_p }}<input type='submit' value='Send'>
+			</form>
+
+			{% else %}
+			<div class='submitted'>
+			<h5> Thank you! We got your message.</h5>
+			<a href='/'>
+			<span class='section-heading fr-btn-generic'>
+			<span class='ion-ios-home'> Home</span></span></span></a>
+			</div>
+			{% endif %}
+		</div>
+		</div>
+	<!-- </div> -->

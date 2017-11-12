@@ -1,0 +1,24 @@
+{% if view_type == 'CategoryListView'%}
+<script>
+// "use strict";
+var tid = setInterval(function() {
+    var state = document.readyState;
+    if (state == 'complete') {
+        clearInterval(tid);
+        var a = document.querySelector.bind(document),
+            b = document.querySelector(".filter-menu"),
+            c = document.querySelector(".toggle_menu");
+
+        a(".toggle_menu").onclick = function() {
+            b.classList.toggle("filter-menu__opened"),
+            c.classList.toggle('hide');
+        },
+        a('.close_menu').onclick = function() {
+            b.classList.toggle("filter-menu__opened"),
+            c.classList.toggle('hide');
+        };
+       
+    }
+}, 100);
+</script>
+{%endif%}
