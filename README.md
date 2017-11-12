@@ -6,7 +6,8 @@ Reading product reviews on Amazon or Best Buy can be a time-consuming process. F
 
 ## Data and Source code
 
-The project is currently in a private repository. If you'd like to learn more about it, please feel free to contact me [here](https://fooreviews.com/contact-us).
+I've left all essential source codes in a private repository. If you're 
+interested on other aspects of the site, please feel free to contact me [here](https://fooreviews.com/contact-us).
 
 
 
